@@ -1,0 +1,23 @@
+.item {
+  min-height: 180px;
+  border: 1px solid grey;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  border-radius:10px;
+  padding-top:75px;
+  margin: 10px;
+  background-color: #ffffcc
+}
+.item .actions{
+  margin-top: -75px;
+}
+.edit {
+  margin-right: 10px;
+}
+.input{
+  width: 85%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: light-grey;
+  margin-bottom: 30px
+}

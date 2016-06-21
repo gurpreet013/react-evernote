@@ -2,9 +2,29 @@
   <head>
     <meta charset="utf-8">
     <title>Evernote</title>
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="public/css/simple-sidebar.css" rel="stylesheet">
+    <link href="public/css/general.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
   </head>
   <body>
     <div id="app" />
     <script src="public/bundle.js" type="text/javascript"></script>
+        <!-- jQuery -->
+    <script src="public/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="public/js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
   </body>
 </html>
