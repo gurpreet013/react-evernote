@@ -3,30 +3,25 @@ var ReactDOM = require('react-dom');
 import Nav from './nav.jsx';
 import SideBar from './sidebar.jsx';
 import Container from './container.jsx';
-
-
-var notesCollection = [
-  {name: "First", notes: []},
-  {name: "Second", notes: []},
-  {name: "Third", notes: []}
-];
+import Error from './error.jsx';
 
 var notebookCollection = [
-  {id: 1, title: 'First NoteBook', notes: []},
-  {id: 2, title: 'Second NoteBook', notes: []},
-  {id: 3, title: 'Third NoteBook', notes: []}
+  {id: 1, title: 'First NoteBook', notes: [{id: 3, notebook_id: 1,name: 'abc', value: 'my first note'}, {id: 1, notebook_id: 1,name: 'def', value: 'my first note'}, {id: 2, notebook_id: 1,name: 'ghi', value: 'my first note'}]},
+  {id: 2, title: 'Second NoteBook', notes: [{id: 6, notebook_id: 2,name: 'abc', value: 'my first note'}, {id: 4, notebook_id: 2,name: 'def', value: 'my first note'}, {id: 5, notebook_id: 2,name: 'ghi', value: 'my first note'}]},
+  {id: 3, title: 'Third NoteBook', notes: [{id: 9, notebook_id: 3,name: 'abc', value: 'my first note'}, {id: 7, notebook_id: 3,name: 'def', value: 'my first note'}, {id: 8, notebook_id: 3,name: 'ghi', value: 'my first note'}]}
 ];
-
 
 var App = React.createClass({
   getInitialState: function() {
-    var notesCollection = this.fetchNotes();
+    var notesCollection = this.fetchNotes(notebookCollection);
     return({flag: 'notebooks',
             notebooks: notebookCollection,
-            notes: notesCollection
+            notes: notesCollection,
+            errorMessages: [],
+            notesTitle: 'ALL'
           });
   },
-  fetchNotes: function() {
+  fetchNotes: function(notebookCollection) {
     return notebookCollection.map(function(item) {
       return(item.notes)
     }).reduce(function(a,b) {
@@ -34,31 +29,37 @@ var App = React.createClass({
     })
   },
   handleClick: function(target) {
-    this.setState({flag: target})
+    this.setState({flag: target, notes: this.fetchNotes(this.state.notebooks), notesTitle: 'ALL'})
   },
-  updateHandler: function(collection, from) {
+  updateHandler: function(collection, from, view, notes, title) {
+    var title = typeof title !== 'undefined' ?  title : 'ALL';
     if(from == 'notebooks') {
       this.setState({notebooks: collection,
-                    flag: from
+                    notes: notes,
+                    flag: view,
+                    notesTitle: title
                   });
     }
   },
-
+  addErrors: function(errors) {
+    this.setState({errorMessages: errors});
+  },
   render: function() {
+    if(this.state.errorMessages.length){
+      var errors = <Error collection={this.state.errorMessages} updateErrors={this.addErrors}/>
+    }
     return(<div className="col-md-12">
             <Nav/>
+            {errors}
             <div className='row col-md-12' id ='wrapper'>
               <SideBar eventHandler={this.handleClick}/>
-              <Container flag = {this.state.flag} notesCollection = {this.state.notes} notebooksCollection = {this.state.notebooks} update = {this.updateHandler}/>
+              <Container flag = {this.state.flag} notesCollection = {this.state.notes} notebooksCollection = {this.state.notebooks} update = {this.updateHandler} addErrors = {this.addErrors} title= {this.state.notesTitle}/>
             </div>
            </div>
           );
   }
 
 });
-
-
-
 
 ReactDOM.render(<App/>, document.getElementById('app'));
 

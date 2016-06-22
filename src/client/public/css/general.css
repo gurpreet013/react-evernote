@@ -21,3 +21,21 @@
   color: light-grey;
   margin-bottom: 30px
 }
+body {
+  padding: 0px;
+  background-color: #222222;
+  color: #4CCAF0 !important;
+}
+
+.navbar {
+  background-color: deepskyblue;
+  border-radius: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.navbar-brand{
+  float: none;
+  text-align: center;
+  color: #ffffcc !important;
+}

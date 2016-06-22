@@ -4,13 +4,10 @@ var Nav = React.createClass({
   render :function() {
     return(
       <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
+        <div className="container-fluid text-center">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">Evernote</a>
+            <a className="navbar-brand" href="#"><strong>GURPREET'S EVERNOTE</strong></a>
           </div>
-          <ul className="nav navbar-nav">
-            <li><a href="#menu-toggle" className="btn btn-default" id="menu-toggle">Toggle Menu</a></li>
-          </ul>
         </div>
       </nav>
       )

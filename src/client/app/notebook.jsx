@@ -6,11 +6,14 @@ var NoteBook = React.createClass({
   },
   deleteHandler: function(name) {
     if(confirm('Are you sure? You want to delete this notebook and associated notes.')) {
-      this.props.remove(name);
+      this.deleteNoteBook(name);
     }
   },
   editHandler: function() {
     this.setState({edit_mode: true});
+  },
+  deleteNoteBook: function(name) {
+    this.props.remove(name);
   },
   renameNoteBook: function(event) {
     var value = $(event.currentTarget).val();
@@ -25,7 +28,7 @@ var NoteBook = React.createClass({
       var text = <span><strong>{this.props.data.title}</strong><br/>{this.props.data.notes.length} Notes</span>
     }
     return(
-        <div className = 'col-md-2 item text-center'>
+        <div className = 'col-md-2 item text-center' onDoubleClick={this.props.showNotes.bind(null, this.props.data.id)}>
           <div className='actions text-right'>
             <span onClick={this.editHandler.bind(null, this.props.data.title)}><i className="fa fa-pencil-square-o edit" aria-hidden="true"></i></span>
             <span onClick={this.deleteHandler.bind(null, this.props.data.title)}>x</span>
